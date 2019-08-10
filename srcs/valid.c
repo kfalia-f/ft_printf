@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:58:27 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/08 20:04:14 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/10 16:49:06 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		is_conversion(const char c)
 {
-		return (ft_strchr("dDioOuUxXeEfFgGaAcCsSpn%", c) != NULL);
+		return (ft_strchr("diuoxXfFeEgGaAcsSpn%", c) != NULL);
 }
 
 int		is_modifier(const char c)

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:41:51 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/08 20:13:38 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/10 20:36:29 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 int		main()
 {
-	ft_printf("hi %d\n", 1, 2, 3);
+	char	*str = "test";
+	char	c = 'A';
+
+	ft_printf("hi %s    %c\n", str, c);
+	//printf("hi %d %d %d\n", 123456789, 2, 3);
 	return (0);
 }
