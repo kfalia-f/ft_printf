@@ -6,7 +6,7 @@
 #    By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/08 16:46:56 by kfalia-f          #+#    #+#              #
-#    Updated: 2019/08/10 20:47:04 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/08/15 19:25:06 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ SOURCES = $(SRC)/main.c \
 		  $(SRC)/helpers.c \
 		  $(SRC)/interpretator.c \
 		  $(SRC)/write.c \
-		  $(SRC)/csp.c
+		  $(SRC)/csp.c \
+		  $(SRC)/diou.c \
+		  $(SRC)/ft_x.c
 
 LIBFT_FOLDER = libft
 

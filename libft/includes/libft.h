@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:37:14 by koparker          #+#    #+#             */
-/*   Updated: 2019/08/10 20:54:08 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/15 17:53:12 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ char				*ft_ls_path_to_file(char *path, int flag);
 
 int					get_next_line(const int fd, char **line);
 
+char				*ft_itoa_unsig(unsigned int n);
 char				*ft_first_word(char *str);
 void				ft_mass2del(char ***a);
 #endif

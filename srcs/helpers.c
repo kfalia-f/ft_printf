@@ -6,13 +6,13 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 20:45:32 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/10 20:50:07 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/15 17:21:55 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-int		ft_1st_per(const char *str)
+int		ft_1st_percent(const char *str)
 {
 	int		i;
 

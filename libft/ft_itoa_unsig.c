@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/08 16:41:51 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/15 19:39:22 by kfalia-f         ###   ########.fr       */
+/*   Created: 2018/11/25 15:38:16 by kfalia-f          #+#    #+#             */
+/*   Updated: 2019/08/15 17:52:03 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#include <stdlib.h>
 
-int		main()
+char	*ft_itoa_unsig(unsigned int n)
 {
-	char	*str = "test";
-	//char	c = 'A';
+	char	s[11];
+	char	*res;
+	int		i;
+	int		j;
 
-	ft_printf("%d\n", str);
-	//ft_printf("hi %X its %d mini %s       %c\n", 7467, -1000, str, c);
-	//ft_printf("hi %X its %d mini %s       %c\n", 7467, -1000, str, c);
-	//printf("hi %d %d %d\n", 123456789, 2, 3);
-	return (0);
+	i = 0;
+	j = 0;
+	while (n > 9)
+	{
+		s[i++] = '0' + (n % 10);
+		n = n / 10;
+	}
+	s[i++] = '0' + n;
+	if ((res = (char *)malloc(sizeof(char) * (i + 1))) == NULL)
+		return (NULL);
+	res[i] = '\0';
+	while (i--)
+		res[i] = s[j++];
+	return (res);
 }

@@ -3,59 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 18:00:20 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/20 17:28:15 by kfalia-f         ###   ########.fr       */
+/*   Created: 2018/11/25 15:38:16 by kfalia-f          #+#    #+#             */
+/*   Updated: 2019/08/15 17:51:35 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <stdlib.h>
 
-static size_t	ft_size(int n)
+char	*ft_itoa(int n)
 {
-	size_t	i;
-	long	tmp;
-
-	i = 1;
-	tmp = n;
-	if (tmp < 0)
-	{
-		tmp *= -1;
-		i++;
-	}
-	while (tmp / 10 != 0)
-	{
-		tmp /= 10;
-		i++;
-	}
-	return (i);
-}
-
-char			*ft_itoa(int n)
-{
-	size_t	i;
-	long	tmp;
+	char	s[11];
 	char	*res;
-	size_t	size;
+	int		neg;
+	int		i;
+	int		j;
 
 	i = 0;
-	tmp = n;
-	size = ft_size(n);
-	if (!(res = (char *)malloc(sizeof(*res) * (size + 1))))
-		return (NULL);
-	res[size] = '\0';
-	if (tmp == 0)
-		res[0] = '0';
-	if (tmp < 0)
-		tmp *= -1;
-	while (tmp > 0)
+	j = 0;
+	neg = n < 0 ? -1 : 1;
+	while (neg * n > 9 || neg * n < 0)
 	{
-		res[size - i - 1] = tmp % 10 + '0';
-		tmp /= 10;
-		i++;
+		s[i++] = '0' + neg * (n % 10);
+		n = n / 10;
 	}
-	if (n < 0)
-		res[0] = '-';
+	s[i++] = '0' + neg * n;
+	if (neg < 0)
+		s[i++] = '-';
+	if ((res = (char *)malloc(sizeof(char) * (i + 1))) == NULL)
+		return (NULL);
+	res[i] = '\0';
+	while (i--)
+		res[i] = s[j++];
 	return (res);
 }
