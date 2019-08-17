@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:19:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/15 17:21:44 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/17 18:49:22 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_flags(const char *str, int *i, t_flags *fl)
 	*i = k;
 }
 
-char		*ft_pull_tmp(const char *str)
+char	*ft_pull_tmp(const char *str)
 {
 	int		i;
 	char	*dst;
@@ -58,16 +58,16 @@ int		ft_parser(const char *str, va_list list, t_flags *fl)
 	tmp = ft_memalloc(1000);
 	tmp = ft_strncat(tmp, str, ft_1st_percent(str));
 	while (str[i])
+	{
+		if (str[i] == '%')
 		{
-			if (str[i] == '%')
-			{
-				ft_flags(str, &i, fl);
-				ft_interpretator(str + i + 1, &tmp, list, fl);
-				fl->res += 1;
-				tmp = ft_strjoin2re(tmp, ft_pull_tmp(str + i + 1));
-			}
-			i++;
+			ft_flags(str, &i, fl);
+			ft_interpretator(str + i + 1, &tmp, list, fl);
+			fl->res += 1;
+			tmp = ft_strjoinre(tmp, ft_pull_tmp(str + i + 1), 3);
 		}
+		i++;
+	}
 	ft_putstr(tmp);
 	ft_strdel(&tmp);
 	return (fl->res);

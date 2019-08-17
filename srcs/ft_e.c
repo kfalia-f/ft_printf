@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin2re.c                                    :+:      :+:    :+:   */
+/*   ft_e.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/10 20:57:06 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/10 20:57:07 by kfalia-f         ###   ########.fr       */
+/*   Created: 2019/08/17 18:59:19 by kfalia-f          #+#    #+#             */
+/*   Updated: 2019/08/17 19:09:23 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <ft_printf.h>
 
-char	*ft_strjoin2re(char *s1, char *s2)
+char	*ft_ecsp(unsigned long long n)
 {
-	char	*s;
+	printf("%llu", n);
+	return (NULL);
+}
 
-	if ((s = ft_strjoin(s1, s2)) == NULL)
-		return (NULL);
-	free(s1);
-	free(s2);
-	return (s);
+void	ft_e(char **tmp, va_list list, t_flags *fl)
+{
+	unsigned long long	n;
+	char				*res;
+
+	n = va_arg(list, unsigned long long);
+	res = ft_ecsp(n);
+	*tmp = ft_strjoinre(*tmp, "", 1);
+	fl->bits.e = 0;
 }

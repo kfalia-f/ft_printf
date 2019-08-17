@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:43:22 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/15 19:24:42 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/17 19:06:35 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ void	ft_interpretator(const char *str, char **tmp, va_list list, t_flags *fl);
 int		ft_valid(const char c);
 
 int		ft_1st_percent(const char *str);
+char	*ft_pull_res(char *str, int i);
+char	*ft_16(unsigned long n, t_flags *fl);
 
 void	ft_csp(char **tmp, va_list list, t_flags *fl);
 void	ft_diou(char **tmp, va_list list, t_flags *fl);
 void	ft_x(char **tmp, va_list list, t_flags *fl);
+void	ft_e(char **tmp, va_list list, t_flags *fl);
 #endif

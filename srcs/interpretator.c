@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:32:47 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/15 19:24:07 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/17 19:07:11 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_interpretator(const char *str, char **tmp, va_list list, t_flags *fl)
 		ft_diou(tmp, list, fl);
 	else if (fl->bits.x || fl->bits.upper_x)
 		ft_x(tmp, list, fl);
+	else if (fl->bits.e || fl->bits.upper_e)
+		ft_e(tmp, list, fl);
 	ft_strlen(str);
 	fl->value = 0;
 }
