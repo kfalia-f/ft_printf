@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:19:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/17 18:49:22 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/17 20:54:04 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,23 @@ void	ft_flags(const char *str, int *i, t_flags *fl)
 	size_t	bits_to_shift;
 	int		k;
 
-	cmp = "-+ #0hlLdiuoxXfeEgaApnsc%";
-	k = *i + 1;
-	while (ft_strchr("diuoxXfFeEgGaAcsSpn%", str[k]) == NULL)
+	cmp = "JH-+ #0hlLdiuoxXfpsc%";
+	k = *i;
+	while (ft_strchr("diuoxXfcsp%", str[++k]) == NULL)
 	{
+		if (str[k] == 'l' && str[k + 1] == 'l')
+		{
+			fl->value |= (1 << 1);
+			continue ;
+		}
+		if (str[k] == 'h' && str[k + 1] == 'h')
+		{
+			fl->value |= (1 << 2);
+			continue ;
+		}
 		if ((s = ft_strchr(cmp, str[k])) != NULL)
 			bits_to_shift = s - cmp;
 		fl->value |= (1 << bits_to_shift);
-		k++;
 	}
 	s = ft_strchr(cmp, str[k]);
 	bits_to_shift = s - cmp;

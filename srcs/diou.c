@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 17:11:30 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/17 18:20:55 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/17 21:16:05 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_d(char **tmp, va_list list, t_flags *fl)
 	char			*res;
 
 	num = va_arg(list, int);
+	if (num > 0 && !fl->bits.u)
+		ft_plus_space(tmp, fl);
 	if (fl->bits.u && num < 0)
 	{
 		unum = 4294967295 + num + 1;
@@ -38,6 +40,8 @@ void	ft_o(char **tmp, va_list list, t_flags *fl)
 
 	i = 0;
 	n = va_arg(list, unsigned int);
+	if (fl->bits.hesh)
+		ft_hesh(tmp, fl);
 	while (n > 7)
 	{
 		str[i++] = '0' + n % 8;

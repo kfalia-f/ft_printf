@@ -6,7 +6,7 @@
 #    By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/08 16:46:56 by kfalia-f          #+#    #+#              #
-#    Updated: 2019/08/17 19:06:54 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/08/17 21:09:12 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SOURCES = $(SRC)/main.c \
 		  $(SRC)/csp.c \
 		  $(SRC)/diou.c \
 		  $(SRC)/ft_x.c \
-		  $(SRC)/ft_e.c
+		  $(SRC)/flags.c
 
 LIBFT_FOLDER = libft
 
