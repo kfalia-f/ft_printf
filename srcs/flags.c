@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 21:04:07 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/17 21:18:21 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/21 19:55:41 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,10 @@ void	ft_hesh(char **tmp, t_flags *fl)
 	else if (fl->bits.upper_x)
 		*tmp = ft_strjoinre(*tmp, "0X", 1);
 }
+/*
+void	ft_null(char *str, t_flags *fl)
+{
+	int		len;
+
+	len = ft_strlen(str);
+}*/
