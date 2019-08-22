@@ -6,11 +6,27 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:19:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/21 20:00:40 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/22 18:20:33 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
+
+int		ft_llhh(const char *str, int k, t_flags *fl)
+{
+	ft_putstr("FLAG");
+	if (str[k + 1] == 'h')
+	{
+		fl->value |= (1 << 1);
+		return (1);
+	}
+	else if (str[k + 1] == 'l')
+	{
+		fl->value |= (1 << 0);
+		return (1);
+	}
+	return (0);
+}
 
 void	ft_flags(const char *str, int *i, t_flags *fl)
 {
@@ -20,33 +36,23 @@ void	ft_flags(const char *str, int *i, t_flags *fl)
 	int		k;
 
 	cmp = "JH-+ #0hlLdiuoxXfpsc%";
-	k = *i;
-	//ft_putnbr(fl->res);
-	while (ft_strchr("diuoxXfcsp%", str[++k]) == NULL) // поднимается хэш при str[k] == 1, нужно распарсить 0
+	k = *i - 1;
+	while (ft_strchr("diuoxXfcsp%", str[++k]) == NULL)
 	{
-		if (fl->res == 0 && ft_isdigit(str[k]))
-			fl->res = ft_atoi(str + k);
-		if (str[k] == 'l' && str[k + 1] == 'l')
-		{
-			fl->value |= (1 << 1);
-			continue ;    //k++ флаг l тоже поднимется.
-		}
-		if (str[k] == 'h' && str[k + 1] == 'h')
-		{
-			fl->value |= (1 << 2);
-			continue ;
-		}
+		if (str[k] == 'l' || str[k] == 'h')
+			if (ft_llhh(str, k, fl))
+			{
+				k++;
+				continue ;
+			}
 		if ((s = ft_strchr(cmp, str[k])) != NULL)
 			bits_to_shift = s - cmp;
 		fl->value |= (1 << bits_to_shift);
 	}
-	if (str[*i] != '0')
-		fl->bits.null = 0;
 	s = ft_strchr(cmp, str[k]);
 	bits_to_shift = s - cmp;
 	fl->value |= (1 << bits_to_shift);
 	*i = k;
-	ft_putnbr(fl->bits.space);
 }
 
 char	*ft_pull_tmp(const char *str)
@@ -63,27 +69,53 @@ char	*ft_pull_tmp(const char *str)
 	return (dst);
 }
 
+void	ft_pars_dig(const char *str, int *i, t_flags *fl)
+{
+	int		k;
+
+	k = *i;
+	if (str[k] == '0')
+	{
+		fl->bits.null = 1;
+		k++;
+	}
+	fl->bits.num = ft_atoi(str + k);
+	while (ft_isdigit(str[k]))
+		k++;
+	if (str[k] == '.')
+	{
+		k++;
+		fl->bits.len = ft_atoi(str + k);
+	}
+	*i = k;
+}
+
 int		ft_parser(const char *str, va_list list, t_flags *fl)
 {
 	char	*tmp;
 	int		i;
 
 	i = 0;
-	fl->res = 0;
+	fl->bits.res = 0;
+	fl->bits.num = 0;
+	fl->bits.len = 0;
 	tmp = ft_memalloc(1000);
 	tmp = ft_strncat(tmp, str, ft_1st_percent(str));
 	while (str[i])
 	{
 		if (str[i] == '%')
 		{
+			i++;
+			if (ft_isdigit(str[i]))
+				ft_pars_dig(str, &i, fl);
 			ft_flags(str, &i, fl);
 			ft_interpretator(str + i + 1, &tmp, list, fl);
-			fl->res += 1;
+			fl->bits.res += 1;
 			tmp = ft_strjoinre(tmp, ft_pull_tmp(str + i + 1), 3);
 		}
 		i++;
 	}
 	ft_putstr(tmp);
 	ft_strdel(&tmp);
-	return (fl->res);
+	return (fl->bits.res);
 }

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:43:22 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/21 19:46:39 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/22 19:51:33 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@ typedef struct		s_bits
 	unsigned int	s : 1;
 	unsigned int	c : 1;
 	unsigned int	persent : 1;
+	int				res;
+	int				num;
+	int				len;
 }					t_bits;
 
 typedef union		u_flags
 {
 	int				value;
 	struct s_bits	bits;
-	int				res;
 }					t_flags;
 
 int		ft_printf(const char *format, ...);
@@ -61,6 +63,8 @@ char	*ft_16(unsigned long n, t_flags *fl);
 
 void	ft_plus_space(char **tmp, t_flags *fl);
 void	ft_hesh(char **tmp, t_flags *fl);
+char	*ft_null(char *str, t_flags *fl);
+char	*ft_len(char *str, t_flags *fl);
 
 void	ft_csp(char **tmp, va_list list, t_flags *fl);
 void	ft_diou(char **tmp, va_list list, t_flags *fl);

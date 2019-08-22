@@ -3,55 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/22 23:05:45 by koparker          #+#    #+#             */
-/*   Updated: 2019/02/09 16:10:43 by koparker         ###   ########.fr       */
+/*   Created: 2018/11/29 15:58:27 by kfalia-f          #+#    #+#             */
+/*   Updated: 2018/11/30 18:34:37 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_is_wsp(char wsp)
-{
-	if (wsp == ' ' || wsp == '\t' || wsp == '\n' ||
-			wsp == '\v' || wsp == '\f' || wsp == '\r')
-		return (1);
-	return (0);
-}
+#include "libft.h"
 
-static int	ft_overflow_check(int n, int sign)
+int		ft_atoi(const char *s)
 {
-	int	tmp;
-
-	tmp = n;
-	if (tmp * 10 / 10 != tmp && sign == 0)
-		return (1);
-	return (0);
-}
-
-int			ft_atoi(const char *str)
-{
-	int		i;
-	long	res;
-	int		sign;
+	int				neg;
+	int				i;
+	long long int	n;
+	long long int	k;
 
 	i = 0;
-	res = 0;
-	sign = 1;
-	while (ft_is_wsp(str[i]))
+	n = 0;
+	neg = 0;
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\f'
+			|| s[i] == '\t' || s[i] == '\r' || s[i] == '\v')
 		i++;
-	if (str[i] == '-')
-		sign = -1;
-	if (str[i] == '-' || str[i] == '+')
+	if (s[i] == 45)
+		neg = 1;
+	if (s[i] == 45 || s[i] == 43)
 		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	while (s[i] >= 48 && s[i] <= 57)
 	{
-		res = res * 10 + str[i++] - '0';
-		if (ft_overflow_check(res, sign) == 1)
-			return (res);
-		if (res < 0)
-			return (sign == 1 ? -1 : 0);
+		k = n;
+		n *= 10;
+		if (n < k)
+			return (neg == 1 ? 0 : -1);
+		n += ((int)s[i++] - 48);
 	}
-	if (sign == -1)
-		return ((int)(-res));
-	return ((int)res);
+	return (neg == 1 ? -n : n);
 }
