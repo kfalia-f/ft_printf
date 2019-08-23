@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 21:04:07 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/22 20:11:16 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/23 19:46:52 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,48 @@ void	ft_hesh(char **tmp, t_flags *fl)
 		*tmp = ft_strjoinre(*tmp, "0X", 1);
 }
 
-char	*ft_null(char *str, t_flags *fl)
+char	*ft_minus(char *str, int len, t_flags *fl, int num)
 {
-	int		len;
-	int		i;
-	char	*tmp;
 	char	c;
+	char	*tmp;
+	int		i;
 
 	c = ' ';
 	if (fl->bits.null)
 		c = '0';
-	if (fl->bits.minus || !fl->bits.num)
-		return (str);
-	len = ft_strlen(str);
-	if (len > fl->bits.num)
-		return (str);
-	tmp = ft_memalloc(fl->bits.num + 1);
-	i = 0;
-	while (i < fl->bits.num - len)
+	tmp = ft_memalloc(num + 1);
+	i = -1;
+	while (++i < len)
+		tmp[i] = str[i];
+	while (i < num)
 		tmp[i++] = c;
+	tmp[i] = '\0';
+	ft_strdel(&str);
+	return (tmp);
+}
+
+char	*ft_null(char *str, t_flags *fl, int num, char c)
+{
+	int		len;
+	int		i;
+	char	*tmp;
+
+	if (fl->bits.null || num == fl->bits.len)
+		c = '0';
+	len = ft_strlen(str);
+	if (!num || len > num)
+		return (str);
+	if (fl->bits.minus)
+		return (ft_minus(str, len, fl, num));
+	tmp = ft_memalloc(num + 1);
+	i = 0;
+	while (i < num - len)
+		tmp[i++] = c;
+	i = num - ft_lon(fl, 2);
+	while (i < num - len)
+		tmp[i++] = '0';
 	len = 0;
-	while (i < fl->bits.num)
+	while (i < num)
 		tmp[i++] = str[len++];
 	tmp[i] = '\0';
 	ft_strdel(&str);
