@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:14:54 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/23 19:47:36 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/24 19:24:20 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_x(char **tmp, va_list list, t_flags *fl)
 {
-	char			str[10000];
 	char			*res;
 	int				n;
 

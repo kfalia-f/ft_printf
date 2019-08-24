@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:19:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/23 18:11:38 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/24 21:49:36 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_pars_dig(const char *str, int *i, t_flags *fl)
 	}
 	while (ft_isdigit(str[k]))
 		k++;
-	*i = k;
+	*i = k - 1;
 }
 
 void	ft_flags(const char *str, int *i, t_flags *fl)
@@ -59,7 +59,7 @@ void	ft_flags(const char *str, int *i, t_flags *fl)
 	int		k;
 
 	cmp = "JH-+ #0hlLdiuoxXfpsc%";
-	k = *i - 1;
+	k = *i;
 	while (ft_strchr("diuoxXfcsp%", str[++k]) == NULL)
 	{
 		if (str[k] == '.' || ft_isdigit(str[k]))
@@ -70,14 +70,14 @@ void	ft_flags(const char *str, int *i, t_flags *fl)
 				k++;
 				continue ;
 			}
-		if ((s = ft_strchr(cmp, str[k])) != NULL)
+		if ((s = ft_strchr("JH-+ #0", str[k])) != NULL)
 			bits_to_shift = s - cmp;
 		fl->value |= (1 << bits_to_shift);
 	}
 	s = ft_strchr(cmp, str[k]);
 	bits_to_shift = s - cmp;
 	fl->value |= (1 << bits_to_shift);
-	*i = k;
+	*i = k + 1;
 }
 
 char	*ft_pull_tmp(const char *str)
@@ -99,14 +99,13 @@ int		ft_parser(const char *str, va_list list, t_flags *fl)
 	char	*tmp;
 	int		i;
 
-	i = 0;
+	i = -1;
 	tmp = ft_memalloc(1000);
 	tmp = ft_strncat(tmp, str, ft_1st_percent(str));
-	while (str[i])
+	while (str[++i])
 	{
 		if (str[i] == '%')
 		{
-			i++;
 			ft_flags(str, &i, fl);
 			ft_interpretator(str + i + 1, &tmp, list, fl);
 			fl->bits.res += 1;
@@ -114,10 +113,9 @@ int		ft_parser(const char *str, va_list list, t_flags *fl)
 			if (str[i] == '\0')
 				break ;
 		}
-		i++;
 	}
-	if (str[i - 1] == '\n')
-		tmp = ft_strjoinre(tmp, "\n", 1);
+//	if (str[i - 1] == '\n')
+//		tmp = ft_strjoinre(tmp, "\n", 1);
 	ft_putstr(tmp);
 	ft_strdel(&tmp);
 	return (fl->bits.res);

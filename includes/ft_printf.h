@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:43:22 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/23 19:47:05 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/24 19:23:36 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ char	*ft_len(char *str, t_flags *fl);
 void	ft_csp(char **tmp, va_list list, t_flags *fl);
 void	ft_diou(char **tmp, va_list list, t_flags *fl);
 void	ft_x(char **tmp, va_list list, t_flags *fl);
+void	ft_f(char **tmp, va_list list, t_flags *fl);
 #endif

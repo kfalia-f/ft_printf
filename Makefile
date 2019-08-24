@@ -6,7 +6,7 @@
 #    By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/08 16:46:56 by kfalia-f          #+#    #+#              #
-#    Updated: 2019/08/17 21:09:12 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/08/24 20:46:03 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SOURCES = $(SRC)/main.c \
 		  $(SRC)/csp.c \
 		  $(SRC)/diou.c \
 		  $(SRC)/ft_x.c \
-		  $(SRC)/flags.c
+		  $(SRC)/flags.c \
+		  $(SRC)/f.c
 
 LIBFT_FOLDER = libft
 
@@ -55,6 +56,3 @@ fclean: clean
 	@make -C $(LIBFT_FOLDER) fclean
 
 re: fclean all
-
-test:
-	@gcc -g $(FLAGS) -o $(NAME) $(HEADERS) $(SOURCES) $(LIBFT)
