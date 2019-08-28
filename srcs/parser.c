@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:19:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/24 21:49:36 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/28 21:35:35 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ void	ft_flags(const char *str, int *i, t_flags *fl)
 				k++;
 				continue ;
 			}
-		if ((s = ft_strchr("JH-+ #0", str[k])) != NULL)
-			bits_to_shift = s - cmp;
-		fl->value |= (1 << bits_to_shift);
+		if ((s = ft_strchr("JH-+ #", str[k])) != NULL)
+		{
+			bits_to_shift = s - "JH-+ #";
+			fl->value |= (1 << bits_to_shift);
+		}
 	}
 	s = ft_strchr(cmp, str[k]);
 	bits_to_shift = s - cmp;
@@ -85,6 +87,8 @@ char	*ft_pull_tmp(const char *str)
 	int		i;
 	char	*dst;
 
+	if (str[0] == '%')
+		return (ft_strdup(""));
 	i = 0;
 	while (str[i] && str[i] != '%')
 		i++;
@@ -107,15 +111,17 @@ int		ft_parser(const char *str, va_list list, t_flags *fl)
 		if (str[i] == '%')
 		{
 			ft_flags(str, &i, fl);
-			ft_interpretator(str + i + 1, &tmp, list, fl);
-			fl->bits.res += 1;
+			if (fl->bits.minus)
+				fl->bits.null = 0;
+			ft_interpretator(&tmp, list, fl);
 			tmp = ft_strjoinre(tmp, ft_pull_tmp(str + i), 3);
 			if (str[i] == '\0')
 				break ;
+			if (str[i] == '%')
+				i--;
 		}
 	}
-//	if (str[i - 1] == '\n')
-//		tmp = ft_strjoinre(tmp, "\n", 1);
+	fl->bits.res = ft_strlen(tmp);
 	ft_putstr(tmp);
 	ft_strdel(&tmp);
 	return (fl->bits.res);

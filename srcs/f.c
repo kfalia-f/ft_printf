@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 19:18:12 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/24 21:05:20 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/28 19:12:04 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,14 @@ void	ft_f(char **tmp, va_list list, t_flags *fl)
 	s1 = ft_strjoinre(s1, ft_s2(len, num), 3);
 	*tmp = ft_strjoinre(*tmp, s1, 3);
 	fl->bits.f = 0;
+}
+
+void	ft_persent(char **tmp, t_flags *fl)
+{
+	char	*res;
+
+	res = ft_strdup("%");
+	if (fl->bits.num || fl->bits.len)
+		res = ft_null(res, fl, ft_lon(fl, 1), ' ');
+	*tmp = ft_strjoinre(*tmp, res, 3);
 }

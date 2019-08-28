@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 21:04:07 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/23 19:46:52 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/28 18:54:25 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	ft_plus_space(char **tmp, t_flags *fl)
 void	ft_hesh(char **tmp, t_flags *fl)
 {
 	if (fl->bits.o)
-		*tmp = ft_strjoinre(*tmp, "0", 1);
+		*tmp = ft_strjoinre("0", *tmp, 2);
 	if (fl->bits.x)
-		*tmp = ft_strjoinre(*tmp, "0x", 1);
+		*tmp = ft_strjoinre("0x", *tmp, 2);
 	else if (fl->bits.upper_x)
-		*tmp = ft_strjoinre(*tmp, "0X", 1);
+		*tmp = ft_strjoinre("0X", *tmp, 2);
 }
 
 char	*ft_minus(char *str, int len, t_flags *fl, int num)
@@ -50,6 +50,18 @@ char	*ft_minus(char *str, int len, t_flags *fl, int num)
 	return (tmp);
 }
 
+int		ft_shesh(char *tmp, t_flags *fl)
+{
+	tmp[0] = '0';
+	if (fl->bits.x)
+		tmp[1] = 'x';
+	else if (fl->bits.upper_x)
+		tmp[1] = 'X';
+	else if (fl->bits.o)
+		return (1);
+	return (2);
+}
+
 char	*ft_null(char *str, t_flags *fl, int num, char c)
 {
 	int		len;
@@ -65,9 +77,13 @@ char	*ft_null(char *str, t_flags *fl, int num, char c)
 		return (ft_minus(str, len, fl, num));
 	tmp = ft_memalloc(num + 1);
 	i = 0;
+	if (fl->bits.hesh && fl->bits.null)
+		i = ft_shesh(tmp, fl);
 	while (i < num - len)
 		tmp[i++] = c;
-	i = num - ft_lon(fl, 2);
+	if (ft_lon(fl, 2) > len)
+		i = num - ft_lon(fl, 2);
+	//printf("i = %d, len = %d, num = %d\n", i, len, num);
 	while (i < num - len)
 		tmp[i++] = '0';
 	len = 0;

@@ -6,13 +6,13 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:32:47 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/24 19:22:58 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/28 21:25:45 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-void	ft_interpretator(const char *str, char **tmp, va_list list, t_flags *fl)
+void	ft_interpretator(char **tmp, va_list list, t_flags *fl)
 {
 	if (fl->bits.c || fl->bits.s || fl->bits.p)
 		ft_csp(tmp, list, fl);
@@ -22,6 +22,7 @@ void	ft_interpretator(const char *str, char **tmp, va_list list, t_flags *fl)
 		ft_x(tmp, list, fl);
 	else if (fl->bits.f)
 		ft_f(tmp, list, fl);
-	ft_strlen(str);
+	else if (fl->bits.persent)
+		ft_persent(tmp, fl);
 	fl->value = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 18:43:04 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/23 18:11:22 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/28 20:56:06 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int		ft_printf(const char *format, ...)
 
 	fl.value = 0;
 	fl.bits.res = 0;
-	fl.bits.num = 0;
-	fl.bits.len = 0;
+	fl.bits.num = -1;
+	fl.bits.len = -1;
 	va_start(argptr, format);
 	count = ft_parser(format, argptr, &fl);
 	va_end(argptr);
