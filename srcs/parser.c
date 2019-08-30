@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:19:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/28 21:35:35 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/30 20:12:26 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int		ft_llhh(const char *str, int k, t_flags *fl)
 		fl->value |= (1 << 0);
 		return (1);
 	}
+	else if (str[k] == 'l')
+		fl->value |= (1 << 8);
+	else if (str[k] == 'h')
+		fl->value |= (1 << 7);
 	return (0);
 }
 

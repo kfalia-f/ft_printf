@@ -6,18 +6,43 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:14:54 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/28 21:05:08 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/30 21:02:27 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-void	ft_x(char **tmp, va_list list, t_flags *fl)
+unsigned long long int	ft_convers(va_list list, t_flags *fl)
 {
-	char			*res;
-	unsigned int	n;
+	if (fl->bits.x || fl->bits.upper_x || fl->bits.o)
+	{
+		if (fl->bits.l)
+			return (va_arg(list, unsigned long));
+		if (fl->bits.ll)
+			return (va_arg(list, unsigned long long));
+		if (fl->bits.h)
+			return ((unsigned short)va_arg(list, int));
+		if (fl->bits.hh)
+			return ((unsigned char)va_arg(list, int));
+		return (va_arg(list, unsigned int));
+	}
+	if (fl->bits.l)
+		return (va_arg(list, long));
+	if (fl->bits.ll)
+		return (va_arg(list, long long));
+	if (fl->bits.h)
+		return ((short)va_arg(list, int));
+	if (fl->bits.hh)
+		return ((char)va_arg(list, int));
+	return (va_arg(list, int));
+}
 
-	n = va_arg(list, unsigned int);
+void					ft_x(char **tmp, va_list list, t_flags *fl)
+{
+	char				*res;
+	unsigned long long	n;
+
+	n = ft_convers(list, fl);
 	if (n == 0 && fl->bits.len < 0)
 	{
 		*tmp = ft_strjoinre(*tmp, "0", 1);

@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 20:45:32 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/28 21:01:52 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/30 19:28:45 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		ft_lon(t_flags *fl, int flag)
 	return (fl->bits.len);
 }
 
-char	*ft_16(unsigned long n, t_flags *fl)
+char	*ft_16(unsigned long int n, t_flags *fl)
 {
 	char	str[1000];
 	char	*res;

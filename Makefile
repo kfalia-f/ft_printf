@@ -6,7 +6,7 @@
 #    By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/08 16:46:56 by kfalia-f          #+#    #+#              #
-#    Updated: 2019/08/28 16:52:20 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/08/30 20:57:51 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SOURCES = $(SRC)/printf.c \
 		  $(SRC)/ft_x.c \
 		  $(SRC)/flags.c \
 		  $(SRC)/f.c \
+		  $(SRC)/helpers_2.c \
 		  $(LIB)/ft_lstnew.c $(LIB)/ft_lstdelone.c $(LIB)/ft_lstdel.c $(LIB)/ft_lstadd.c \
 		  $(LIB)/ft_lstiter.c $(LIB)/ft_lstmap.c $(LIB)/ft_listsize.c $(LIB)/ft_lstpush_back.c \
 		  $(LIB)/ft_lstback.c $(LIB)/ft_lstat.c $(LIB)/ft_lstinsert_at.c $(LIB)/ft_lstfree_node.c \
@@ -48,7 +49,7 @@ SOURCES = $(SRC)/printf.c \
 		  $(LIB)/ft_itoa.c $(LIB)/ft_putchar.c $(LIB)/ft_putstr.c $(LIB)/ft_putendl.c \
 		  $(LIB)/ft_putnbr.c $(LIB)/ft_putchar_fd.c $(LIB)/ft_putstr_fd.c $(LIB)/ft_putendl_fd.c \
 		  $(LIB)/ft_putnbr_fd.c  $(LIB)/get_next_line.c $(LIB)/ft_itoa_unsig.c $(LIB)/ft_str_path.c \
-		  $(LIB)/ft_ls_path_to_file.c $(LIB)/ft_del.c $(LIB)/ft_first_word.c $(LIB)/ft_mass2del.c
+		  $(LIB)/ft_ls_path_to_file.c $(LIB)/ft_del.c $(LIB)/ft_first_word.c $(LIB)/ft_mass2del.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 

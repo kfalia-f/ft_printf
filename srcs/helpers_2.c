@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   helpers_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/25 15:38:16 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/30 20:45:45 by kfalia-f         ###   ########.fr       */
+/*   Created: 2019/08/30 19:35:17 by kfalia-f          #+#    #+#             */
+/*   Updated: 2019/08/30 21:06:00 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <ft_printf.h>
 
-char	*ft_itoa_unsig(long long int n)
+char    *ft_itoa_long(long long int n)
 {
-	char	s[11];
-	char	*res;
-	int		i;
-	int		j;
+	char    s[50];
+	char    *res;
+	int     neg;
+	int     i;
+	int     j;
 
 	i = 0;
 	j = 0;
-	while (n > 9)
+	neg = n < 0 ? -1 : 1;
+	while (neg * n > 9 || neg * n < 0)
 	{
-		s[i++] = '0' + (n % 10);
+		s[i++] = '0' + neg * (n % 10);
 		n = n / 10;
 	}
-	s[i++] = '0' + n;
+	s[i++] = '0' + neg * n;
+	if (neg < 0)
+		s[i++] = '-';
 	if ((res = (char *)malloc(sizeof(char) * (i + 1))) == NULL)
 		return (NULL);
 	res[i] = '\0';
