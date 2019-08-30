@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:14:54 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/30 21:02:27 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/30 22:19:07 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 unsigned long long int	ft_convers(va_list list, t_flags *fl)
 {
-	if (fl->bits.x || fl->bits.upper_x || fl->bits.o)
+	if (fl->bits.x || fl->bits.upper_x ||
+			fl->bits.u || fl->bits.o)
 	{
 		if (fl->bits.l)
 			return (va_arg(list, unsigned long));
