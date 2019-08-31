@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 16:43:22 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/30 20:59:49 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/31 22:53:48 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,14 @@ int						ft_valid(const char c);
 int						ft_1st_percent(const char *str);
 char					*ft_pull_res(char *str, int i);
 char					*ft_16(unsigned long n, t_flags *fl);
-int						ft_lon(t_flags *fl, int flag);
+int						ft_mom(int n1, int n2, int flag);
 unsigned long long int	ft_convers(va_list list, t_flags *fl);
 char					*ft_itoa_long(long long int n);
 
 void					ft_plus_space(char **tmp, t_flags *fl);
 void					ft_hesh(char **tmp, t_flags *fl);
 char					*ft_null(char *str, t_flags *fl, int num, char c);
+char					*ft_num_form(char *str, t_flags *fl, int num, char c);
 char					*ft_len(char *str, t_flags *fl);
 void					ft_persent(char **tmp, t_flags *fl);
 

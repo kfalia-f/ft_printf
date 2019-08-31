@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 20:45:32 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/30 23:10:30 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/31 17:09:38 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_pull_res(char *str, int i)
 
 int		ft_lon(t_flags *fl, int flag)
 {
-	if (fl->bits.len < 0 || (!fl->bits.f && !fl->bits.s))
+	if (fl->bits.len < 0)
 		fl->bits.len = 0;
 	if (fl->bits.num < 0)
 		fl->bits.num = 0;

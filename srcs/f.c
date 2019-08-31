@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 19:18:12 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/28 19:12:04 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/08/31 19:20:55 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ void	ft_persent(char **tmp, t_flags *fl)
 
 	res = ft_strdup("%");
 	if (fl->bits.num || fl->bits.len)
-		res = ft_null(res, fl, ft_lon(fl, 1), ' ');
+		res = ft_null(res, fl, ft_mom(fl->bits.len, fl->bits.num, 1), ' ');
 	*tmp = ft_strjoinre(*tmp, res, 3);
 }
