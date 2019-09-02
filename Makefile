@@ -6,7 +6,7 @@
 #    By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/08 16:46:56 by kfalia-f          #+#    #+#              #
-#    Updated: 2019/08/30 20:57:51 by kfalia-f         ###   ########.fr        #
+#    Updated: 2019/09/02 15:24:00 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ SOURCES = $(SRC)/printf.c \
 		  $(SRC)/flags.c \
 		  $(SRC)/f.c \
 		  $(SRC)/helpers_2.c \
+		  $(SRC)/flags2.c \
+		  $(SRC)/write.c \
 		  $(LIB)/ft_lstnew.c $(LIB)/ft_lstdelone.c $(LIB)/ft_lstdel.c $(LIB)/ft_lstadd.c \
 		  $(LIB)/ft_lstiter.c $(LIB)/ft_lstmap.c $(LIB)/ft_listsize.c $(LIB)/ft_lstpush_back.c \
 		  $(LIB)/ft_lstback.c $(LIB)/ft_lstat.c $(LIB)/ft_lstinsert_at.c $(LIB)/ft_lstfree_node.c \

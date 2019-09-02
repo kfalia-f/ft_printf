@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 17:11:30 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/31 23:41:22 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/09/02 21:16:02 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,38 @@ void	ft_d(char **tmp, va_list list, t_flags *fl)
 	char				*res;
 
 	num = ft_convers(list, fl);
+	if (num == 0 && !fl->bits.num && !fl->bits.len && !fl->bits.flag)
+	{
+		if (fl->bits.plus)
+			*tmp = ft_strjoinre(*tmp, "+0", 1);
+		else
+			*tmp = ft_strjoinre(*tmp, "0", 1);
+		return ;
+	}
 	if (fl->bits.len == 0 && num == 0)
 		res = ft_strdup("");
 	else if (fl->bits.l || fl->bits.ll)
 		res = ft_itoa_long(num);
-	else if (fl->bits.u)
-		res = ft_itoa_unsig(num);
 	else
 		res = ft_itoa(num);
 	if (fl->bits.num > 0 || fl->bits.len > 0)
 		res = ft_num_form(res, fl, ft_mom(fl->bits.len, fl->bits.num, 1), ' ');
 	ft_sign(&res, num, fl);
+	*tmp = ft_strjoinre(*tmp, res, 3);
+}
+
+void	ft_u(char **tmp, va_list list, t_flags *fl)
+{
+	unsigned long long	num;
+	char				*res;
+	
+	num = ft_convers(list, fl);
+	if (fl->bits.len == 0 && fl->bits.flag && num == 0)
+		res = ft_strdup("");
+	else
+		res = ft_itoa_unsig(num);
+	if (fl->bits.num > 0 || fl->bits.len > 0)
+		res = ft_num_form(res, fl, ft_mom(fl->bits.len, fl->bits.num, 1), ' ');
 	*tmp = ft_strjoinre(*tmp, res, 3);
 }
 
@@ -100,30 +121,42 @@ void	ft_o(char **tmp, va_list list, t_flags *fl)
 
 	i = 0;
 	n = va_arg(list, unsigned int);
-	while (n > 7)
+	if (n == 0)
 	{
-		str[i++] = '0' + n % 8;
-		n /= 8;
+		if (fl->bits.len == 0 && fl->bits.flag)
+			res = ft_strdup("");
+		else
+			res = ft_strdup("0");
 	}
-	str[i] = '0' + n;
-	str[i + 1] = '\0';
-	res = ft_memalloc(i + 2);
-	n = 0;
-	while (str[i])
-		res[n++] = str[i--];
-	res[n] = '\0';
+	else
+	{
+		while (n > 7)
+		{
+			str[i++] = '0' + n % 8;
+			n /= 8;
+		}
+		str[i] = '0' + n;
+		str[i + 1] = '\0';
+		res = ft_memalloc(i + 2);
+		n = 0;
+		while (str[i])
+			res[n++] = str[i--];
+		res[n] = '\0';
+	}
 	if (fl->bits.hesh)
 		ft_hesh(&res, fl);
-	if (fl->bits.null > 0 || fl->bits.num > 0)
-		res = ft_null(res, fl, ft_mom(fl->bits.len, fl->bits.num, 1), ' ');
+	if (fl->bits.null || fl->bits.num || fl->bits.len)
+		res = ft_num_form(res, fl, ft_mom(fl->bits.len, fl->bits.num, 1), ' ');
 	*tmp = ft_strjoinre(*tmp, res, 3);
 	fl->bits.o = 0;
 }
 
 void	ft_diou(char **tmp, va_list list, t_flags *fl)
 {
-	if (fl->bits.d || fl->bits.i || fl->bits.u)
+	if (fl->bits.d || fl->bits.i)
 		ft_d(tmp, list, fl);
+	else if (fl->bits.u)
+		ft_u(tmp, list, fl);
 	else if (fl->bits.o)
 		ft_o(tmp, list, fl);
 	fl->value = 0;

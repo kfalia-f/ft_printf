@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:14:54 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/31 22:50:37 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/09/02 19:00:16 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ void					ft_x(char **tmp, va_list list, t_flags *fl)
 	unsigned long long	n;
 
 	n = ft_convers(list, fl);
-	if (n == 0 && fl->bits.len < 0)
+	if (n == 0 && fl->bits.len <= 0 && fl->bits.num <= 0)
 	{
+		if (fl->bits.flag)
+			return ;
 		*tmp = ft_strjoinre(*tmp, "0", 1);
 		return ;
 	}
@@ -58,7 +60,9 @@ void					ft_x(char **tmp, va_list list, t_flags *fl)
 	if (fl->bits.upper_x)
 		fl->bits.x = 1;
 	if (fl->bits.null || fl->bits.num > 0)
-		res = ft_null(res, fl, ft_mom(fl->bits.len, fl->bits.num, 1), ' ');
+		res = ft_num_form(res, fl, ft_mom(fl->bits.len, fl->bits.num, 1), ' ');
+	if (fl->bits.hesh && fl->bits.null)
+		res[1] = 'x';
 	*tmp = ft_strjoinre(*tmp, res, 3);
 	fl->value = 0;
 }

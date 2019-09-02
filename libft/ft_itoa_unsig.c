@@ -6,13 +6,13 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 15:38:16 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/30 20:45:45 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/09/02 21:00:25 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*ft_itoa_unsig(long long int n)
+char	*ft_itoa_unsig(unsigned long long int n)
 {
 	char	s[11];
 	char	*res;
