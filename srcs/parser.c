@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:19:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/09/02 21:45:06 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/09/12 18:20:43 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,8 @@ void	ft_flags(const char *str, int *i, t_flags *fl)
 
 	cmp = "JH-+ #0hlLdiuoxXfpsc%";
 	k = *i;
-	while (str[k] && ft_strchr("diuoxXfcsp%", str[k]) == NULL)
+	while (str[k] && ft_strchr("diuoxXfcsp%", str[++k]) == NULL)
 	{
-		k++;
 		if (str[k] == '.' || ft_isdigit(str[k]))
 			ft_pars_dig(str, &k, fl);
 		if (str[k] == 'l' || str[k] == 'h')
@@ -117,9 +116,10 @@ int		ft_parser(const char *str, va_list list, t_flags *fl)
 		if (str[i] == '%')
 		{
 			ft_flags(str, &i, fl);
+			//printf ("i = %d\n", i);
 			if (fl->bits.minus)
 				fl->bits.null = 0;
-			if (str[i] != '\0' && str[i - 1] != '\0')
+			if (str[i] != '\0' || str[i - 1] != '\0')
 			{
 				ft_interpretator(&tmp, list, fl);
 				tmp = ft_strjoinre(tmp, ft_pull_tmp(str + i), 3);
