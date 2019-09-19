@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:19:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/09/12 18:20:43 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/09/12 19:44:09 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int		ft_parser(const char *str, va_list list, t_flags *fl)
 	int		i;
 
 	i = -1;
-	tmp = ft_memalloc(1000);
+	tmp = ft_memalloc(1);
 	tmp = ft_strncat(tmp, str, ft_1st_percent(str));
 	while (str[++i])
 	{

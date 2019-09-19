@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 19:18:12 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/09/12 18:20:46 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/09/20 00:01:44 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,103 @@ void	ft_num(double *num)
 		*num *= -1;
 }
 
-char	*ft_s2(int len, double num)
+char	*ft_s2(int len, double num, int *up)
 {
-	int		i;
-	char	*s2;
+	int			i;
+	//char		*str;
+	char		*s2;
+	int			sig;
+	long long	k;
 
-	ft_num(&num);
 	s2 = ft_memalloc(len + 1);
 	i = 0;
+	sig = num >= 0 ? 1 : -1;
+	num = (num - (int)num) * sig;
+	
+	while (i++ < len + 1)
+		num *= 10;
+	k = (long long)(num + 0.1);
+	//printf("%f, k = %lld\n", num, k);
+	i = 0;
+	*up = first_dig(k);
+	if (k % 10 > 5)
+		k += 10;
+	if (*up != first_dig(k))
+		*up = first_dig(k) == 1 ? 1 : 0;
+	else
+		*up = 0;
+	k = k / 10;
+	
+
+	/*
+	str = ft_memalloc(100);
+	printf("%f\n", num);
+	if (num >= 0.000010 && num <= 0.00002)
+		str = ft_strjoinre(str, "000001", 1);;
+	while (i <= len || num < 4)
+	{
+		str[i] = (int)num + 48;
+		printf("n = %f s = %c in = %d\n", num, str[i], (int) num);
+		num = (num - (int)num) * 10;
+		i++;
+	}*/
 	while (i < len)
 	{
-		if (num + 0.1 >= 1)
-			ft_num(&num);
-		num *= 10;
-		s2[i++] = '0' + num + 0.1;
+		s2[i++] = k % 10 + 48;
+		k /= 10;
 	}
+	s2 = ft_reverse_str(s2);
 	s2[i] = '\0';
+	if (len == 0)
+	{
+		ft_strdel(&s2);
+		return (ft_strdup(""));
+	}
 	return (s2);
+}
+
+char	*ft_minu(char *s1, t_flags *fl, int len)
+{
+	char	*tmp;
+	int		i;
+	int		k;
+
+	i = 0;
+	k = 0;
+	tmp = ft_memalloc(len + 1);
+	while (i < len)
+		tmp[i++] = s1[k++];
+	while (i < fl->bits.num)
+		tmp[i++] = ' ';
+	tmp[i] = '\0';
+	ft_strdel(&s1);
+	return (tmp);
+}
+
+char	*ft_long(char *s1, t_flags *fl, char c)
+{
+	int		len;
+	int		i;
+	int		k;
+	char	*tmp;
+
+	if (fl->bits.null)
+		c = '0';
+	len = ft_strlen(s1);
+	if (len >= fl->bits.num)
+		return (s1);
+	if (fl->bits.minus)
+		return (ft_minu(s1, fl, len));
+	tmp = ft_memalloc(fl->bits.num + 1);
+	i = 0;
+	k = 0;
+	while (i < fl->bits.num - len)
+		tmp[i++] = c;
+	while (i < fl->bits.num)
+		tmp[i++] = s1[k++];
+	tmp[i] = '\0';
+	ft_strdel(&s1);
+	return (tmp);
 }
 
 void	ft_f(char **tmp, va_list list, t_flags *fl)
@@ -44,15 +124,27 @@ void	ft_f(char **tmp, va_list list, t_flags *fl)
 	char	*s1;
 	int		len;
 	int		i;
+	int		up;
 	double	num;
 
 	num = va_arg(list, double);
-	s1 = ft_strjoinre(ft_itoa(num), ".", 1);
 	len = 6;
 	i = 0;
-	if (fl->bits.len)
+	up = 0;
+	//printf("s = %s, n = %f\n", s1, num);
+	if (fl->bits.flag)
 		len = fl->bits.len;
-	s1 = ft_strjoinre(s1, ft_s2(len, num), 3);
+	if (len > 0 || fl->bits.hesh)
+		s1 = ft_strjoinre(ft_itoa(num), ".", 1);
+	else
+		s1 = ft_strdup(ft_itoa(num));
+	if (num < 0 && s1[0] != '-')
+		s1 = ft_strjoinre("-", s1, 2);
+	s1 = ft_strjoinre(s1, ft_s2(len, num, &up), 3);
+	if (up)
+		ft_overup(&s1, num < 0);
+	if (fl->bits.num)
+		s1 = ft_long(s1, fl, ' ');
 	*tmp = ft_strjoinre(*tmp, s1, 3);
 	fl->bits.f = 0;
 }

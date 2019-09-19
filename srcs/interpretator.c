@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:32:47 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/08/28 21:25:45 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/09/19 17:54:07 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,7 @@ void	ft_interpretator(char **tmp, va_list list, t_flags *fl)
 	else if (fl->bits.persent)
 		ft_persent(tmp, fl);
 	fl->value = 0;
+	fl->bits.num = 0;
+	fl->bits.len = 0;
+	fl->bits.flag = 0;
 }
