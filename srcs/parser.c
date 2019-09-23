@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:19:28 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/09/12 19:44:09 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/09/20 20:40:39 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int		ft_llhh(const char *str, int k, t_flags *fl)
 {
+	if (str[k] == 'L')
+	{
+		fl->bits.upper_l = 1;
+		return (0);
+	}
 	if (str[k + 1] == 'h')
 	{
 		fl->value |= (1 << 1);
@@ -69,7 +74,7 @@ void	ft_flags(const char *str, int *i, t_flags *fl)
 	{
 		if (str[k] == '.' || ft_isdigit(str[k]))
 			ft_pars_dig(str, &k, fl);
-		if (str[k] == 'l' || str[k] == 'h')
+		if (str[k] == 'l' || str[k] == 'h' || str[k] == 'L')
 			if (ft_llhh(str, k, fl))
 			{
 				k++;

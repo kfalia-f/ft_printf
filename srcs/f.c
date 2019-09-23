@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <kfalia-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 19:18:12 by kfalia-f          #+#    #+#             */
-/*   Updated: 2019/09/20 05:13:36 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/09/23 16:13:49 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,33 @@ void	ft_num(double *num)
 		*num *= -1;
 }
 
-char	*ft_s2(int len, double num, int *up)
+int		ft_round_f(double num, int k)
 {
-	int			i;
+	if ((int)num % 2 == 0 && (int)num != 0)
+		return (0);
+	num -= (int)num;
+	if (k > 5)
+		return (1);
+	return (0);
+}
+
+char	*ft_s2(int len, double num, int *up, int i)
+{
 	char		*s2;
 	int			sig;
 	long long	k;
+	double		ro;
 
 	s2 = ft_memalloc(len + 1);
-	i = 0;
+	ro = num;
 	sig = num >= 0 ? 1 : -1;
 	num = (num - (int)num) * sig;
 	while (i++ < len + 1)
 		num *= 10;
 	k = (long long)(num + 0.1);
-	//printf("%f, k = %lld\n", num, k);
 	i = 0;
 	*up = first_dig(k);
-	if (k % 10 > 5)
+	if (ft_round_f(ro, k % 10))
 		k += 10;
 	if (*up != first_dig(k))
 		*up = first_dig(k) == 1 ? 1 : 0;
@@ -144,20 +153,19 @@ void	ft_f(char **tmp, va_list list, t_flags *fl)
 	int		len;
 	int		i;
 	int		up;
-	double	num;
+	long double	num;
 
-	num = va_arg(list, double);
+	num = fl->bits.upper_l ? va_arg(list, long double) : va_arg(list, double);
 	len = 6;
 	i = 0;
 	up = 0;
-	//printf("s = %s, n = %f\n", s1, num);
 	if (fl->bits.flag)
 		len = fl->bits.len;
 	if (len > 0 || fl->bits.hesh)
 		s1 = ft_strjoinre(ft_itoa(num), ".", 1);
 	else
 		s1 = ft_strdup(ft_itoa(num));
-	s1 = ft_strjoinre(s1, ft_s2(len, num, &up), 3);
+	s1 = ft_strjoinre(s1, ft_s2(len, num, &up, 0), 3);
 	if (up)
 		ft_overup(&s1, num < 0);
 	if (num < 0 && s1[0] != '-')
